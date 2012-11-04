@@ -10,6 +10,7 @@
 
 <script type="text/javascript">
   $(window).load(function(){
+    if <%=!eval(@user.history).nil? %>{
     var total_lis = <%=eval(@user.history).count %>;
     var tweets_pattern = <%=eval(@user.history)%>;
     console.log(tweets_pattern);
@@ -57,6 +58,7 @@
         return false;
     }
    }
+  }
 });
   
 </script>
