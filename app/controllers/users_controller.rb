@@ -42,6 +42,9 @@ class UsersController < ApplicationController
       @user.save!
       end
     rescue Exception => exp
+        if exp == "Sorry, that page does not exist"
+          exp = "Sorry wrong Twitter Handle :P"
+        end
        redirect_to '/' , :notice => exp
     end
     #render :text => "Wait Guru"

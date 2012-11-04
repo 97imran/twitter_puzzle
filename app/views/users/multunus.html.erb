@@ -16,7 +16,7 @@
   </div>
   <div class="row-fluid">
     <div class="span5 logo-container">
-      <h1><%=link_to "Solved By: Gunanka", "http://twitter.com/Gunanka"%></h1>
+      <h1><%=link_to "Solved By: Gunanka", "https://github.com/Gunanka/twitter_puzzle"%></h1>
     </div>
     <div class="span7 right-column">
       <img src="/assets/birdie.png">
@@ -25,7 +25,7 @@
       <h2 class="error-message">
       </h2>
       <%= form_tag("/cloud_create", :method => 'get') do  %>
-      Twitter handle: @
+      Twitter Handle: @
       <%=text_field_tag "twitter_handle"%>
       <br/><br/>
       <%= submit_tag "Generate Cloud", :class => "btn btn-large btn-danger"%>
