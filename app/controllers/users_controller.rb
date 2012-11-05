@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   
   def cloud_create
     begin
-      twitter_handle = params[:twitter_handle]
+      twitter_handle = params.has_key?(twitter_handle) ? [:twitter_handle] : ""
       @client = Twitter::Client.new
       @client.user(twitter_handle)
       @user = User.from_multunus(twitter_handle)
