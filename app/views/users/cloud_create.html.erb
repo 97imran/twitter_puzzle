@@ -10,10 +10,8 @@
 
 <script type="text/javascript">
   $(window).load(function(){
-    if <%=!eval(@user.history).nil? %>{
-    var total_lis = <%=eval(@user.history).count %>;
-    var tweets_pattern = <%=eval(@user.history)%>;
-    console.log(tweets_pattern);
+    var total_lis = <%=eval(@user.history).count unless @user.history.nil?%>;
+    var tweets_pattern = <%=eval(@user.history).to_a unless @user.history.nil?%>;
     var k = Math.ceil(total_lis/4);
     var x=1;
     if (total_lis < 2) {
@@ -58,7 +56,7 @@
         return false;
     }
    }
-  }
+ 
 });
   
 </script>
@@ -80,7 +78,7 @@
   <div class="container-fluid">
       <div class="cloud" >
 	<ul id="xpower" class="xmpl" style="width: 1281px; height: 600px; list-style: none; margin: 0px; padding: 0px; position: relative; ">
-          <li value="<%=eval(@user.history).blank? ? "" : eval(@user.history).first[0]%>" style="left: 585px; top: 360px; font-size: 100px;"><%=eval(@user.history).blank? ? "" : eval(@user.history).first[0]%></li>
+          <li value="<%=@user.history.blank? ? "" : eval(@user.history).first[0]%>" style="left: 585px; top: 360px; font-size: 100px;"><%=@user.history.blank? ? "" : eval(@user.history).first[0]%></li>
         </ul>
       </div>
       <div style="margin-top: 30px;" >

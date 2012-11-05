@@ -4,8 +4,9 @@ class UsersController < ApplicationController
   def cloud_create
     begin
       twitter_handle = params[:twitter_handle]
-      @user = User.from_multunus(twitter_handle)
       @client = Twitter::Client.new
+      @client.user(twitter_handle)
+      @user = User.from_multunus(twitter_handle)
       @user_cloud_pattern = @user.history.nil? ?  Hash.new : eval(@user.history)
       @user.since_id = 1 if  @user.since_id.nil?
       @user.count = 0 if @user.count.nil?
@@ -38,11 +39,12 @@ class UsersController < ApplicationController
             end
         end while (@user.count.between?(200, 1000))
       @user.since_id = @tweet_first_id
-      @user.history = @user_cloud_pattern.sort_by {|k,v| v}.reverse.to_s
+      @user.history = Hash[@user_cloud_pattern.sort_by {|k,v| v}.reverse].to_s
       @user.save!
       end
+      @flag = true if @user.history.nil?
     rescue Exception => exp
-        if exp == "Sorry, that page does not exist"
+        if exp.to_s == "Sorry, that page does not exist"
           exp = "Sorry wrong Twitter Handle :P"
         end
        redirect_to '/' , :notice => exp
